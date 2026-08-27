@@ -1,0 +1,8 @@
+The xquadro source files in this directory are licensed under the MIT License.
+
+See the header of each source file for the copyright notice and permission notice.
+
+The X.Org server interfaces, structures, and macros used by xquadro are defined
+by the X.Org server, which is licensed under the MIT/X11 license. xquadro does
+not bundle X.Org source code; it is built as a DDX module inside an upstream
+xserver source tree at compile time.

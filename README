@@ -1,0 +1,37 @@
+xquadro — PlexyDesk X11 DDX Extension
+=======================================
+
+xquadro is a DDX (Device-Dependent X) driver that integrates X11 client
+support into the plexyshell compositor via DMA-BUF zero-copy buffer sharing.
+It is built as an extension module inside the xorg-server source tree.
+
+BUILD ORDER
+  Module 7 of 7. Install libplexy (module 1) first.
+
+PREREQUISITES
+  1. Clone the xorg xserver source tree alongside this directory:
+       git clone https://gitlab.freedesktop.org/xorg/xserver.git
+
+  2. Install build tools and xserver dependencies:
+       apt install meson ninja-build xserver-xorg-dev \
+                   libpixman-1-dev libxfont-dev libxkbfile-dev \
+                   x11proto-dev
+
+  3. Install libplexy (module 1):
+       cd ../libplexy && make install PREFIX=/usr/local
+
+BUILD
+  make XSERVER_DIR=./xserver PREFIX=/usr/local
+
+  The Makefile will:
+  - Copy src/xquadro/ into xserver/hw/xquadro/
+  - Inject the subdir('xquadro') entry into xserver/hw/meson.build
+  - Add plexy_lib / plexy_include options into xserver/meson_options.txt
+  - Run meson setup and ninja
+
+INSTALL
+  make install XSERVER_DIR=./xserver
+
+LICENSE
+  GNU Affero General Public License v3.0 only — see COPYING
+  Copyright (C) 2024-2026 Siraj Razick
